@@ -6,7 +6,7 @@ import GradientButton from "../../Components/GradientButton";
 const Banner = () => {
   return (
     <div className="hero py-44" style={{ backgroundImage: `url(${bg})` }}>
-      <div className="container mx-auto flex justify-center">
+      <div className="container px-3 mx-auto flex justify-center">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src={chair}
@@ -19,7 +19,7 @@ const Banner = () => {
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <GradientButton />
+            <GradientButton>Get Started</GradientButton>
             {/* <button className="btn btn-primary text-white font-bold uppercase bg-gradient-to-r from-secondary to-primary">
               Get Started
             </button> */}

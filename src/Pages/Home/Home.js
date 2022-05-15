@@ -4,14 +4,20 @@ import Banner from "./Banner";
 import ServiceDescription from "./ServiceDescription";
 import Info from "./Info";
 import Services from "./Services";
+import MakeAppointment from "./MakeAppointment";
+import Testimonials from "./Testimonials";
+import Footer from "../../Components/Footer";
 
 const Home = () => {
   return (
-    <div className="px-3">
+    <div className="">
       <Banner />
       <Info />
       <Services />
       <ServiceDescription />
+      <MakeAppointment />
+      {/* <Testimonials /> */}
+      {/* <Footer /> */}
     </div>
   );
 };
