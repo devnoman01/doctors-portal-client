@@ -11,7 +11,7 @@ const Footer = () => {
       }}
       className=""
     >
-      <div className="container mx-auto footer px-3 pt-16">
+      <div className="container mx-auto footer px-3">
         <div>
           <svg
             width="50"

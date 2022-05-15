@@ -5,7 +5,10 @@ import GradientButton from "../../Components/GradientButton";
 
 const Banner = () => {
   return (
-    <div className="hero py-44" style={{ backgroundImage: `url(${bg})` }}>
+    <div
+      className="hero py-16 md:py-32 ld:py-44"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <div className="container px-3 mx-auto flex justify-center">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
