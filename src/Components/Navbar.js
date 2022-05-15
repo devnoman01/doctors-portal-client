@@ -5,29 +5,41 @@ const Navbar = () => {
   const menuItems = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/" className="font-medium">
+          Home
+        </Link>
       </li>
       <li>
-        <Link to="/appointment">Appointment</Link>
+        <Link to="/appointment" className="font-medium">
+          Appointment
+        </Link>
       </li>
       <li>
-        <Link to="/review">Review</Link>
+        <Link to="/review" className="font-medium">
+          Review
+        </Link>
       </li>
       <li>
-        <Link to="/contact">Contact</Link>
+        <Link to="/contact" className="font-medium">
+          Contact
+        </Link>
       </li>
       <li>
-        <Link to="/about">About</Link>
+        <Link to="/about" className="font-medium">
+          About
+        </Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="/login" className="font-medium">
+          Login
+        </Link>
       </li>
     </>
   );
 
   return (
-    <div className="navbar bg-base-100">
-      <div className="navbar-start">
+    <div className="navbar container mx-auto bg-base-100">
+      <div className="navbar">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
             <svg
