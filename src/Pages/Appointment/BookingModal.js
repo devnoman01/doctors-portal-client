@@ -22,8 +22,8 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
           >
             ✕
           </label>
-          <h3 className="font-bold text-lg text-secondary mb-8">
-            Booking for:{treatment.name}
+          <h3 className="font-medium text-lg text-secondary mb-8">
+            Booking for: {treatment.name}
           </h3>
           <form onSubmit={handleBooking}>
             <input
