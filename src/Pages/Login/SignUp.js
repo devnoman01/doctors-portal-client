@@ -1,22 +1,22 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import {
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { useForm } from "react-hook-form";
 import Loading from "../../Components/Loading";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
@@ -37,15 +37,36 @@ const Login = () => {
   }
 
   const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
+    createUserWithEmailAndPassword(data.email, data.password);
   };
 
   return (
     <div className="container flex justify-center mx-auto px-4">
       <div className="card mx-auto mt-28 w-full md:max-w-sm bg-base-100 border border-gray-200 shadow-lg">
         <div className="card-body items-center text-center">
-          <h2 className="text-2xl font-medium mb-4">Login</h2>
+          <h2 className="text-2xl font-medium mb-4">Sign Up</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="text-md">Name</span>
+              </label>
+              <input
+                {...register("name", {
+                  required: {
+                    value: true,
+                    message: "Name Required",
+                  },
+                })}
+                type="text"
+                placeholder="Your Name"
+                className="input input-bordered w-full"
+              />
+              {errors.name?.type === "required" && (
+                <span className="text-sm text-left text-red-500">
+                  {errors.name.message}
+                </span>
+              )}
+            </div>
             <div className="form-control w-full">
               <label className="label">
                 <span className="text-md">Email</span>
@@ -76,7 +97,7 @@ const Login = () => {
                 </span>
               )}
             </div>
-            <div className="form-control w-full mb-5">
+            <div className="form-control w-full  mb-5">
               <label className="label">
                 <span className="text-md">Password</span>
               </label>
@@ -108,19 +129,15 @@ const Login = () => {
             </div>
             {signInError}
             <input
-              value="Login"
+              value="Sign Up"
               type="submit"
               className="input input-bordered w-full bg-accent text-white uppercase font-medium"
             />
           </form>
-          <p className="text-sm text-left mt-1 mb-0">
-            Forgot Password?{" "}
-            <button className="text-secondary font-medium">Reset Here</button>
-          </p>
           <p className="text-sm text-center mt-1">
-            New to Doctors Portal?{" "}
-            <Link to="/signup" className="text-secondary font-medium">
-              Create new account
+            Already Registered?{" "}
+            <Link to="/login" className="text-secondary font-medium">
+              Login Here
             </Link>
           </p>
           <div className="divider">OR</div>
@@ -141,4 +158,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
