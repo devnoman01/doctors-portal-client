@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
@@ -6,9 +6,15 @@ import {
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../../Components/Loading";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import ForgetPasswordModal from "../../Components/ForgetPasswordModal";
 
 const Login = () => {
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
+
   const {
     register,
     formState: { errors },
@@ -32,8 +38,14 @@ const Login = () => {
     );
   }
 
+  // useEffect(() => {
+  //   if (user || gUser) {
+  //     navigate(from, { replace: true });
+  //   }
+  // }, [user, gUser, from, navigate]);
+
   if (user || gUser) {
-    console.log(user);
+    navigate(from, { replace: true });
   }
 
   const onSubmit = (data) => {
@@ -115,7 +127,12 @@ const Login = () => {
           </form>
           <p className="text-sm text-left mt-1 mb-0">
             Forgot Password?{" "}
-            <button className="text-secondary font-medium">Reset Here</button>
+            <label
+              htmlFor="forget-password-model"
+              className="btn btn-sm px-1 py-0 bg-transparent border-none hover:bg-transparent modal-button text-secondary font-medium"
+            >
+              Reset Here
+            </label>
           </p>
           <p className="text-sm text-center mt-1">
             New to Doctors Portal?{" "}
@@ -137,6 +154,7 @@ const Login = () => {
           </button>
         </div>
       </div>
+      <ForgetPasswordModal />
     </div>
   );
 };
