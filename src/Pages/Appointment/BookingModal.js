@@ -4,7 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Swal from "sweetalert2";
 
-const BookingModal = ({ date, treatment, setTreatment }) => {
+const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
   const { _id, name, slots } = treatment;
   const [user, loading, error] = useAuthState(auth);
   const formattedDate = format(date, "PP");
@@ -48,6 +48,7 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
             showConfirmButton: false,
           });
         }
+        refetch();
         // set null to close the modal
         setTreatment(null);
       });
