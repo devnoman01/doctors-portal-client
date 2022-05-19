@@ -58,8 +58,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar container mx-auto bg-base-100">
-      <div className="navbar-start">
+    <div className="navbar container mx-auto bg-base-100 border">
+      <div className="navbar">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
             <svg
@@ -86,13 +86,13 @@ const Navbar = () => {
         </div>
         <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center lg:navbar-end lg:mr-6 hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end lg:hidden">
         <label
           htmlFor="dashboard-sidebar"
-          className="btn btn-ghost drawer-button lg:hidden"
+          className="btn btn-ghost drawer-button "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

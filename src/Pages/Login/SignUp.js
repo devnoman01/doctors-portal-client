@@ -8,6 +8,7 @@ import {
 import auth from "../../firebase.init";
 import Loading from "../../Components/Loading";
 import { Link, useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const [displayName, setDisplayName] = useState("");
@@ -25,6 +26,8 @@ const SignUp = () => {
 
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  const [token] = useToken(user || gUser);
+
   let signInError;
 
   if (loading || gLoading || updating) {
@@ -39,15 +42,14 @@ const SignUp = () => {
     );
   }
 
-  if (user || gUser) {
-    console.log(user);
+  if (token) {
+    // console.log(user);
+    navigate("/appointment");
   }
 
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    console.log(data);
-    navigate("/appointment");
   };
 
   return (

@@ -10,7 +10,7 @@ const Dashboard = () => {
           type="checkbox"
           className="drawer-toggle"
         />
-        <div className="drawer-content p-3">
+        <div className="drawer-content p-3 h-full">
           {/* Page content here */}
           <h2 className="text-3xl">Welcome to your Dashboard</h2>
           <Outlet />
@@ -20,10 +20,19 @@ const Dashboard = () => {
           <ul className="menu p-4 overflow-y-auto w-fit bg-base-100 text-base-content">
             {/* Sidebar content here */}
             <li>
-              <Link to="/dashboard">My Appointments</Link>
+              <Link to="/dashboard" className="border mb-3">
+                My Appointments
+              </Link>
             </li>
             <li>
-              <Link to="/dashboard/review">My Reviews</Link>
+              <Link to="/dashboard/history" className="border mb-3">
+                My History
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard/review" className="border mb-3">
+                My Reviews
+              </Link>
             </li>
           </ul>
         </div>
