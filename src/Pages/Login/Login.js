@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import Loading from "../../Components/Loading";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ForgetPasswordModal from "../../Components/ForgetPasswordModal";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -26,7 +27,15 @@ const Login = () => {
 
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
+  const [token] = useToken(user || gUser);
+
   let signInError;
+
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, from, navigate]);
 
   if (loading || gLoading) {
     return <Loading />;
@@ -38,15 +47,9 @@ const Login = () => {
     );
   }
 
-  // useEffect(() => {
-  //   if (user || gUser) {
-  //     navigate(from, { replace: true });
-  //   }
-  // }, [user, gUser, from, navigate]);
-
-  if (user || gUser) {
-    navigate(from, { replace: true });
-  }
+  // if (token) {
+  //   navigate(from, { replace: true });
+  // }
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);

@@ -43,7 +43,10 @@ const Navbar = () => {
       <li>
         {user ? (
           <button
-            onClick={() => signOut(auth)}
+            onClick={() => {
+              signOut(auth);
+              localStorage.removeItem("accessToken");
+            }}
             className="btn btn-active btn-ghost"
           >
             Sign Out
@@ -58,7 +61,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar container mx-auto bg-base-100 border">
+    <div className="navbar container mx-auto bg-base-100">
       <div className="navbar">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
