@@ -7,7 +7,7 @@ const ManageDoctors = () => {
     data: doctors,
     isLoading,
     refetch,
-  } = useQuery("users", () =>
+  } = useQuery("doctor", () =>
     fetch("http://localhost:5000/doctor", {
       method: "GET",
       headers: {
