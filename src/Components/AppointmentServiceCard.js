@@ -2,7 +2,7 @@ import React from "react";
 import GradientButton from "./GradientButton";
 
 const AppointmentServiceCard = ({ service, setTreatment }) => {
-  const { name, slots } = service;
+  const { name, price, slots } = service;
   return (
     <div className="card border border-gray-200 shadow-md">
       <div className="card-body items-center text-center">
@@ -11,11 +11,14 @@ const AppointmentServiceCard = ({ service, setTreatment }) => {
           {slots.length > 0 ? (
             <span className="">{slots[0]}</span>
           ) : (
-            <span className="text-red-600">No Slot Available</span>
+            <span className="text-red-600">Try another date</span>
           )}
         </p>
         <p className="text-sm">
           {slots.length} {slots.length > 1 ? "spaces" : "space"} available
+        </p>
+        <p>
+          <small className="font-medium">Price: ${price}</small>
         </p>
         <div className="card-actions mt-2">
           <label

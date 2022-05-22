@@ -4,46 +4,60 @@ import Swal from "sweetalert2";
 const DoctorRow = ({ doctor, index, refetch }) => {
   const { name, email, specialty, img } = doctor;
 
-  // const handleMakeAdmin = (e) => {
-  //   e.preventDefault();
-  //   fetch(`http://localhost:5000/doctor/admin/${email}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 403) {
-  //         Swal.fire({
-  //           title: "No Permission",
-  //           html: `You can't make ${email} an admin`,
-  //           icon: "error",
-  //           showConfirmButton: false,
-  //         });
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       if (data.modifiedCount > 0) {
-  //         refetch();
-  //         Swal.fire({
-  //           title: "Added As Admin",
-  //           html: `${email} is now an admin`,
-  //           icon: "success",
-  //           showConfirmButton: false,
-  //         });
-  //       }
-  //     });
-  // };
+  const handleDelete = (email) => {
+    Swal.fire({
+      title: "Sure to remove doctor?",
+      text: `Are you sure to remove ${name}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#218838",
+      confirmButtonText: "Yes, Remove!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/doctor/${email}`, {
+          method: "DELETE",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Doctor Removed",
+                html: "You removed a doctor",
+                icon: "info",
+                showConfirmButton: false,
+              });
+              refetch();
+            }
+          });
+      }
+    });
+  };
 
   return (
     <tr>
+      <td>{index + 1}</td>
       <td>
-        <img src={img} className="w-10" alt="" />
+        <div className="avatar">
+          <div className="w-12 rounded">
+            <img src={img} alt={name} />
+          </div>
+        </div>
       </td>
       <td>{name}</td>
       <td>{email}</td>
       <td>{specialty}</td>
+      <td>
+        <button
+          onClick={() => handleDelete(email)}
+          className="btn btn-xs btn-error"
+        >
+          Remove Dr.
+        </button>
+      </td>
     </tr>
   );
 };

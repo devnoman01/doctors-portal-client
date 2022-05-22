@@ -2,12 +2,13 @@ import React from "react";
 import { useQuery } from "react-query";
 import DoctorRow from "../../Components/DoctorRow";
 import Loading from "../../Components/Loading";
+
 const ManageDoctors = () => {
   const {
     data: doctors,
     isLoading,
     refetch,
-  } = useQuery("doctor", () =>
+  } = useQuery("doctors", () =>
     fetch("http://localhost:5000/doctor", {
       method: "GET",
       headers: {
@@ -27,10 +28,12 @@ const ManageDoctors = () => {
         <table className="table w-full">
           <thead>
             <tr>
+              <th>#</th>
               <th>Image</th>
               <th>Name</th>
               <th>Email</th>
               <th>Specialty</th>
+              <th>Manage</th>
             </tr>
           </thead>
           <tbody>
@@ -39,7 +42,7 @@ const ManageDoctors = () => {
                 key={doctor._id}
                 doctor={doctor}
                 index={index}
-                // refetch={refetch}
+                refetch={refetch}
               />
             ))}
           </tbody>
