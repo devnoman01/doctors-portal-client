@@ -11,12 +11,15 @@ const MyAppointments = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/booking?patient=${user.email}`, {
-        method: "GET",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://young-thicket-64286.herokuapp.com/booking?patient=${user.email}`,
+        {
+          method: "GET",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => {
           if (res.status === 401 || res.status === 403) {
             signOut(auth);
@@ -62,7 +65,9 @@ const MyAppointments = () => {
                     </Link>
                   )}
                   {a.price && a.paid && (
-                    <span className="text-success">Paid</span>
+                    <span title={a.transactionId} className="text-success">
+                      Paid
+                    </span>
                   )}
                 </td>
               </tr>

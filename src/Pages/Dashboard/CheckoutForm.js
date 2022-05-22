@@ -16,7 +16,7 @@ const CheckoutForm = ({ appointment }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://young-thicket-64286.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const CheckoutForm = ({ appointment }) => {
         appointmentId: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/booking/${_id}`, {
+      fetch(`https://young-thicket-64286.herokuapp.com/booking/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
@@ -128,7 +128,7 @@ const CheckoutForm = ({ appointment }) => {
         <button
           className="btn btn-sm btn-success text-white w-full mt-8"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || success}
         >
           Pay
         </button>
